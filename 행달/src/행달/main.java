@@ -1,10 +1,10 @@
 package Çà´Þ;
 
 public class main {
-public static void main(String[] args) {
-	System.out.println("test");
-	System.out.println("commit test");
-	System.out.println("±èÇÏ¶ûÀº °³½ê´Ù");
-	System.out.println("AXY");
-}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
