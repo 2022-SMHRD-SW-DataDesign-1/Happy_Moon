@@ -19,7 +19,7 @@ public class SigninController {
 		
 		
 		//dao랑 controller랑 주고받기 로그인은 성공하였는가
-		public void LoginCon(String id, String pw) {
+		public boolean LoginCon(String id, String pw) {
 			// DAO에 있는 login()
 			boolean result = dao.login(id, pw);
 			
@@ -31,6 +31,8 @@ public class SigninController {
 			}else {
 				System.out.println("로그인 실패");
 			}
+			
+			return result;
 		}
 		
 		

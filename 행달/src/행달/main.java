@@ -26,12 +26,15 @@ public class main {
 		dotArt art = new dotArt();
 		UserDAO dao = new UserDAO();  // 나중에 올리기
 		UserDTO dto = null;
+		int choice;
 		
 		// controller에 접근할 수 있는 객체 생성
 		SigninController lm = new SigninController();
 		
 		Scanner sc= new Scanner(System.in);
 		boolean flag = true;
+		boolean play ;
+		int count=1;
 		
 		//어떤 형태로 화면을 구성할 것인가?
 		art.init();
@@ -62,17 +65,23 @@ public class main {
 				String id = sc.next();
 				System.out.print("비밀번호 입력 : ");
 				String pw = sc.next();
-				lm.LoginCon(id, pw);
+				play=lm.LoginCon(id, pw);
 				
-				while(flag) {
+				while(play) {
 					System.out.println("[1]새로하기 [2]이어하기 [3]종료");
 					String menu2 = sc.next();
 					if(menu2.equals("1")) {
-						
+						while(flag) {
+							System.out.println("=================================================");
+							new script().showStory(count++);
+							System.out.println("=================================================");
+							System.out.print("당신의 선택은? >>");
+							choice = sc.nextInt();
+						}
 					}else if(menu2.equals("2")) {
 						
 					}else if(menu2.equals("3")) {
-						
+						flag = false;
 					}else {
 						System.out.println("어허");
 					}

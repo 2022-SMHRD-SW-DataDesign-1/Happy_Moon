@@ -61,7 +61,6 @@ public class UserDAO {
 			
 			connect();
 			
-			// 담배피고나서 회원가입할때 id랑 pw값 순서 바껴서 
 			try {
 				String sql = "select * From User_table where id = ? and pw = ?";
 				psmt = conn.prepareStatement(sql);
@@ -101,7 +100,7 @@ public class UserDAO {
 				String name = dto.getName();
 				String save = dto.getAge();
 				
-				String sql = "insert into user_table(user_number,id,pw,name) values(user_id.nextval,?, ?, ?)"; // 원래는 'juhui', '5850', '이주희', 20
+				String sql = "insert into user_table(user_number,id,pw,name) values(user_id.nextval,?, ?, ?)"; 
 				psmt = conn.prepareStatement(sql);
 				
 				psmt.setString(1, id);
@@ -149,21 +148,20 @@ public class UserDAO {
  			connect();
 			
 			try {
-				String sql = "select * from member";
+				String sql = "select * from user_table";
 				
 				psmt = conn.prepareStatement(sql);
 				
 				rs = psmt.executeQuery();
 				
 				// rs의 커서를 기준으로 다음에 데이터가 있는지 없는지 확인
-				System.out.println("ID\tPW\tNAME\tAGE");
+				System.out.println("ID\tPW\tNAME");
 				while(rs.next()) {
 					String id = rs.getString(1);
 					String pw = rs.getString(2);
 					String name = rs.getString(3);
-					int age = rs.getInt(4);
 					
-					System.out.printf("%s\t%s\t%s\t%d\n", id, pw, name, age);
+					System.out.printf("%s\t%s\t%s\t%d\n", id, pw, name);
 				}
 				
 			} catch (SQLException e) {
