@@ -38,7 +38,7 @@ public class StoryDAO {
 			while (rs.next()) {
 
 			
-				System.out.printf("%s\t%s\t%s\t%d\n", id, pw, name, age);
+				System.out.printf("%s\t%s\t%s\t\n", id, pw, name);
 			}
 
 		} catch (ClassNotFoundException e) {

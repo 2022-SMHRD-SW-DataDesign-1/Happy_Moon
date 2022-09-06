@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Choice {
 	Scanner sc= new Scanner(System.in);
-	public int choice;
+	private int choice;
 
 	public Choice(int choice) {
 		super();
