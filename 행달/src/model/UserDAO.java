@@ -61,13 +61,14 @@ public class UserDAO {
 			
 			connect();
 			
-			
+			// 담배피고나서 회원가입할때 id랑 pw값 순서 바껴서 
 			try {
-				String sql = "select * From member where id = ? and pw = ?";
+				String sql = "select * From User_table where id = ? and pw = ?";
 				psmt = conn.prepareStatement(sql);
 				
 				psmt.setString(1, id);
 				psmt.setString(2, pw);
+				
 				
 				rs = psmt.executeQuery();
 				
@@ -100,13 +101,12 @@ public class UserDAO {
 				String name = dto.getName();
 				String save = dto.getAge();
 				
-				String sql = "insert into member values(?, ?, ?, ?)"; // 원래는 'juhui', '5850', '이주희', 20
+				String sql = "insert into user_table(user_number,id,pw,name) values(user_id.nextval,?, ?, ?)"; // 원래는 'juhui', '5850', '이주희', 20
 				psmt = conn.prepareStatement(sql);
 				
 				psmt.setString(1, id);
 				psmt.setString(2, pw);
 				psmt.setString(3, name);
-				psmt.setString(4, save);
 				
 				cnt = psmt.executeUpdate(); // 저장 후 Login View가서 제대로 되는지 코드 작성 후 실행
 				
@@ -115,22 +115,6 @@ public class UserDAO {
 				e.printStackTrace();
 			}
 			
-//			try {
-//				Class.forName("oracle.jdbc.driver.OracleDriver");
-//				
-//				String url = "jdbc:oracle:thin:@127.0.0.1:1521:xe";
-//				String db_id = "hr";
-//				String db_pw = "hr";
-//					
-//				conn = DriverManager.getConnection(url, db_id, db_pw);
-//				
-//			} catch (ClassNotFoundException e) {
-//				System.out.println("로딩실패");
-//				e.printStackTrace();
-//			} catch (SQLException e) {
-//				System.out.println("DB연결 실패");
-//				e.printStackTrace();
-//			}                                                  -> 메소드 추출
 			
 			
 			return cnt;	// 초반에		
@@ -198,12 +182,12 @@ public class UserDAO {
 				
 				rs = psmt.executeQuery();
 				
-				System.out.println("ID\tPW\tNAME\tAGE");
+				System.out.println("ID\tPW\tNAME\tStory");
 				while(rs.next()) {
-					String id2 = rs.getString(1);
-					String pw = rs.getString(2);
-					String name = rs.getString(3);
-					String save = rs.getString(4);
+					String id2 = rs.getString(2);
+					String pw = rs.getString(3);
+					String name = rs.getString(4);
+					String save = rs.getString(5);
 					
 					System.out.printf("%s\t%s\t%s\t%d\n", id2, pw, name, save);
 				}

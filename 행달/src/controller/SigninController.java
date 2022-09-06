@@ -15,7 +15,10 @@ public class SigninController {
 		// Main 메소드에서 로그인을 실행 시
 		// 아이디와 비밀번호를 받아와 DAO 로 연결해주는 메소드 생성
 		
-		// 서로서로 DAO와 사용자를 연결해주기 위해서는 메소드로 접근해야함
+		
+		
+		
+		//dao랑 controller랑 주고받기 로그인은 성공하였는가
 		public void LoginCon(String id, String pw) {
 			// DAO에 있는 login()
 			boolean result = dao.login(id, pw);
@@ -30,8 +33,10 @@ public class SigninController {
 			}
 		}
 		
-		public void InsertCon(String id, String pw, String name, String save) {
-			dto = new UserDTO(id, pw, name,save); // 생성자 메소드
+		
+		//회원가입을할꺼여
+		public void InsertCon(String id, String pw, String name) {
+			dto = new UserDTO(id, pw, name); // 생성자 메소드
 			
 			int cnt = dao.insert(dto); // sql만들기
 			
@@ -42,6 +47,7 @@ public class SigninController {
 			}
 		}
 
+		//회원정보 수정 ㅋㅋ~ id랑 패스워드 바꿈
 		public void UpdateCon(String id, String pw) {
 			
 			dto = new UserDTO(id, pw); // 2
@@ -61,7 +67,7 @@ public class SigninController {
 			dao.select(id);	
 		}
 		
-		//회원 삭제
+		//회원 탈퇴
 		public void DeleteCon(String id) {
 			int cnt = dao.delete(id);
 			if(cnt > 0) {
