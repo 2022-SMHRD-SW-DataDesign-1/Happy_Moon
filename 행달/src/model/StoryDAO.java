@@ -6,63 +6,73 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class StoryDAO {
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		// 1. jdbc µø¿˚∑Œµ˘
-		Connection conn = null;
-		PreparedStatement psmt = null;
-		ResultSet rs = null;
+import controller.Choice;
 
+public class StoryDAO {
+	public DynamicArr seq;
+	public int ing_game;
+	
+	
+	
+	
+	public StoryDAO(int num) {
+		super();
+		this.ing_game = num;
+	}
+
+
+
+
+	public void save_story() {
+		
+		seq.add(ing_game);
+	}
+	public void load_story()
+	{
+		ResultSet rs = null;
 		try {
+			// 1. JDBC ÎèôÏ†Å Î°úÎî©
+			// ÎèôÏ†ÅÎ°úÎî©ÏùÑ ÏúÑÌïú Î©îÏÜåÎìúÎ•º Î∂àÎü¨ÏôÄÏïºÌï®
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			// 2. µ•¿Ã≈Õ∫£¿ÃΩ∫ ø¨∞·
+			// 2. Îç∞Ïù¥ÌÑ∞Î≤†Ïù¥Ïä§ Ïó∞Í≤∞
 			String url = "jdbc:oracle:thin:@project-db-stu.ddns.net:1524:xe";
 			String db_id = "campus_g_0830_6";
 			String db_pw = "smhrd6";
-			conn = DriverManager.getConnection(url, db_id, db_pw);
-			// 3. sqlπÆ ¿€º∫
+
+			Connection conn = DriverManager.getConnection(url, db_id, db_pw);
+
+			if (conn != null) {
+				System.out.println("Ïó∞Í≤∞ ÏÑ±Í≥µ");
+
+			} else {
+				System.out.println("Ïó∞Í≤∞ Ïã§Ìå®");
+			}
+			// 3. SQLÎ¨∏ ÏûëÏÑ±/Ï†ÑÏÜ°
+			String sql = "select story from story_table where story_num = " + seq;
+
+			PreparedStatement psmt = conn.prepareStatement(sql);
+			rs= psmt.executeQuery();
 			
-			String sql = "select * from story_table";
-			psmt = conn.prepareStatement(sql);
-
-			// CRUD : Create, Read, Update, Delete
-			// ª˝º∫ ¿–±‚,¡∂»∏ ∞ªΩ≈,ºˆ¡§ ªË¡¶
-			// insert, update, delete -> executeUpdate();
-			// select -> executeQuery();
-
-			rs = psmt.executeQuery();
-
-			
-		
+			//System.out.println(rs.next());
 			while (rs.next()) {
+				String story = rs.getString(1);
+			System.out.printf("%s",story);
+			}
 
-			
-				System.out.printf("%s\t%s\t%s\t\n", id, pw, name);
+			// 4. Ï¢ÖÎ£å - CLOSE();
+			if (psmt != null) {
+				psmt.close();
+			}
+			if (conn != null) {
+				conn.close();
 			}
 
 		} catch (ClassNotFoundException e) {
-			System.out.println("µø¿˚∑Œµ˘ Ω«∆–");
+			System.out.println("ÎèôÏ†ÅÎ°úÎî© Ïã§Ìå®");
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			// 4. ¡æ∑·
-			try {
-				if(rs != null) {
-					rs.close();
-				}
-				if(psmt != null) {
-					psmt.close();
-				}
-				if(conn != null) {
-					conn.close();
-				}
-				
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
+			System.out.println("DB Ïó∞Í≤∞ Ïã§Ìå®");
 		}
 
 	}
-	
+
 }

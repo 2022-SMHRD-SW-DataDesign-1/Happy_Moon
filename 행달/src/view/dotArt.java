@@ -1,4 +1,6 @@
-package 행달;
+package view;
+
+
 
 public class dotArt {
 	public void init() {
