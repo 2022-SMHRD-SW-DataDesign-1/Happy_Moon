@@ -1,34 +1,30 @@
 package model;
 
 		// DTO : Data Transfer Object
-		// Member Table data¸¦ ÁÖ°í ¹Ş´Â ¿ëµµ! - °´Ã¼, Å¬·¡½º
+		// Member Table dataï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½Ş´ï¿½ ï¿½ëµµ! - ï¿½ï¿½Ã¼, Å¬ï¿½ï¿½ï¿½ï¿½
 public class UserDTO {
 	// main X 
 	
-	// ÇÊµå ÇÊ¿ä(¼Ó¼º)
+	// ï¿½Êµï¿½ ï¿½Ê¿ï¿½(ï¿½Ó¼ï¿½)
 	private String id;
 	private String pw;
 	private String name;
 	private String save;
 	
-	// »ı¼ºÀÚ, getter ¸Ş¼Òµå
 	
-	// À¯ÀÇ¹ÌÇÑ ¸Ş¼Òµå´Â ¾Æ´Ï°í ÀÌ·¯ÇÑ ±â´ÉÀ» ¼öÇàÇÏ±â À§ÇØ¼­ ÇÊ¿äÇÑ °Í, Ç×»ó ÇüÅÂ°¡ µ¿ÀÏÇÏ±â ¶§¹®¿¡ Á÷Á¢ ½áµµ µÇÁö¸¸ ´ÜÃàÅ°ÃßÃµ
-	// »ı¼ºÀÚ ¸¸µé±â : ¿ìÅ¬¸¯ -> source -> generate constructor using fields
-	// È¸¿ø°¡ÀÔÀ» À§ÇÑ dto
 	public UserDTO(String id, String pw, String name) {
 		this.id = id;
 		this.pw = pw;
 		this.name = name;
 	}
 	   
-	// È¸¿øÁ¤º¸ ¼öÁ¤À» À§ÇÑ dto
+	
 	public UserDTO(String id, String pw) {
 		this.id = id;
 		this.pw = pw;
 	}
 
-	// ¿ìÅ¬¸¯  -> source -> generate getters and setters
+	// ï¿½ï¿½Å¬ï¿½ï¿½  -> source -> generate getters and setters
 	public String getId() {
 		return id;
 	}
