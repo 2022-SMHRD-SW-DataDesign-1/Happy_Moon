@@ -70,6 +70,22 @@ public class main {
 				String pw = sc.next();
 				lm.LoginCon(id, pw);
 				
+				while(flag) {
+					System.out.println("[1]새로하기 [2]이어하기 [3]종료");
+					String menu2 = sc.next();
+					if(menu2.equals("1")) {
+						
+					}else if(menu2.equals("2")) {
+						
+					}else if(menu2.equals("3")) {
+						
+					}else {
+						System.out.println("어허");
+					}
+				}
+				
+				
+				
 				
 			}else {
 				System.out.println("어허 1~3 -> 조금 오만하셨습니다.");
@@ -80,5 +96,7 @@ public class main {
 		System.out.println("종 료 오 오 오오오오오");
 
 	}
+	
+	
 
 }
