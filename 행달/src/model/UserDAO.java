@@ -10,14 +10,14 @@ public class UserDAO {
 
 
 // DAO : Data Access Object
-		// Member Table°ú data¸¦ ÁÖ°í ¹Þ´Â ±â´ÉµéÀ» ¸ð¾ÆµÐ Å¬·¡½º, °´Ã¼
-		// È¸¿ø°¡ÀÔ°ú ·Î±×ÀÎ ¿ëµµ·Î insert¶û select¸¸ Á¤ÀÇ!! 
+		// Member Tableï¿½ï¿½ dataï¿½ï¿½ ï¿½Ö°ï¿½ ï¿½Þ´ï¿½ ï¿½ï¿½Éµï¿½ï¿½ï¿½ ï¿½ï¿½Æµï¿½ Å¬ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½Ã¼
+		// È¸ï¿½ï¿½ï¿½ï¿½ï¿½Ô°ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ëµµï¿½ï¿½ insertï¿½ï¿½ selectï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½!! 
 		Connection conn;
 		PreparedStatement psmt = null;
 		ResultSet rs;
 		boolean result;
 		
-		private void connect() {
+		protected void connect() {
 			try {
 				Class.forName("oracle.jdbc.driver.OracleDriver");
 				
@@ -28,11 +28,13 @@ public class UserDAO {
 				conn = DriverManager.getConnection(url, db_id, db_pw);
 				
 			} catch (ClassNotFoundException e) {
-				System.out.println("·Îµù½ÇÆÐ");
+				System.out.println("ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½");
 				e.printStackTrace();
 			} catch (SQLException e) {
-				System.out.println("DB¿¬°á ½ÇÆÐ");
+				System.out.println("DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 				e.printStackTrace();
+			} finally {
+				getClose();
 			}
 		}
 		
@@ -57,10 +59,11 @@ public class UserDAO {
 	
 		public boolean login(String id, String pw) { // boolean -> int (cnt)
 			
-			// boolean result; Àü¿ªº¯¼ö·Î »©±â
+			// boolean result; ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			
 			connect();
 			
+			// ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¶ï¿½ idï¿½ï¿½ pwï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ï¿½ï¿½ 
 			try {
 				String sql = "select * From User_table where id = ? and pw = ?";
 				psmt = conn.prepareStatement(sql);
@@ -86,12 +89,12 @@ public class UserDAO {
 	
 		// insert()	
 		
-		// ¿ÜºÎ¿¡¼­ Á¢±ÙÀ»ÇØ¼­ ÀÌ ¸Þ¼Òµå¸¦ È£ÃâÇØ¼­ ¾µ°Å´Ù String id, String pw, String name, int age 
-		// ±×·±µ¥ ÀÌ 4°³ÀÇ º¯¼ö¸¦ ÇÑ¹ø¿¡ ¹ÞÀ» ¼ö ÀÖ´Ù.MemberDTO
+		// ï¿½ÜºÎ¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ ï¿½Þ¼Òµå¸¦ È£ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½Å´ï¿½ String id, String pw, String name, int age 
+		// ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ 4ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½.MemberDTO
 		public int insert(UserDTO dto) { // void -> int
-			int cnt = 0;// ÃÊ¹Ý¿¡(insert´Â ÇàÀÇ °ªÀÌ º¯°æ int Å¸ÀÔÀ¸·Î °ª ¸®ÅÏ)
+			int cnt = 0;// ï¿½Ê¹Ý¿ï¿½(insertï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ int Å¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
 			
-			// 1. µ¿Àû·Îµù(¼±ÇàÀÛ¾÷ ÇÊ¿ä)
+			// 1. ï¿½ï¿½ï¿½ï¿½ï¿½Îµï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½Û¾ï¿½ ï¿½Ê¿ï¿½)
 			connect();
 			
 			try {
@@ -107,7 +110,7 @@ public class UserDAO {
 				psmt.setString(2, pw);
 				psmt.setString(3, name);
 				
-				cnt = psmt.executeUpdate(); // ÀúÀå ÈÄ Login View°¡¼­ Á¦´ë·Î µÇ´ÂÁö ÄÚµå ÀÛ¼º ÈÄ ½ÇÇà
+				cnt = psmt.executeUpdate(); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Login Viewï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½ï¿½ï¿½ ï¿½Úµï¿½ ï¿½Û¼ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -116,11 +119,11 @@ public class UserDAO {
 			
 			
 			
-			return cnt;	// ÃÊ¹Ý¿¡		
+			return cnt;	// ï¿½Ê¹Ý¿ï¿½		
 		}
 		
 		public int update(UserDTO dto) {
-			int cnt = 0; // ¾êµµ Àü¿ªº¯¼ö·Î ¸¸µé¾î ¹ö¸®±â
+			int cnt = 0; // ï¿½êµµ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			connect();
 			
 			try {
@@ -143,7 +146,7 @@ public class UserDAO {
 			return cnt;
 		}
 
-		// ÀüÃ¼È¸¿ø Á¶È¸ÇÏ´Â ±â´É
+		// ï¿½ï¿½Ã¼È¸ï¿½ï¿½ ï¿½ï¿½È¸ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½
 		public void selestAll() {
  			connect();
 			
@@ -154,8 +157,6 @@ public class UserDAO {
 				
 				rs = psmt.executeQuery();
 				
-				// rsÀÇ Ä¿¼­¸¦ ±âÁØÀ¸·Î ´ÙÀ½¿¡ µ¥ÀÌÅÍ°¡ ÀÖ´ÂÁö ¾ø´ÂÁö È®ÀÎ
-				System.out.println("ID\tPW\tNAME");
 				while(rs.next()) {
 					String id = rs.getString(1);
 					String pw = rs.getString(2);
@@ -169,7 +170,7 @@ public class UserDAO {
 			}
 		}
 		
-		// Æ¯Á¤ È¸¿øÁ¶È¸±â´É
+		// Æ¯ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½ï¿½
 		public void select(String id) {
 			connect();
 			
@@ -197,7 +198,7 @@ public class UserDAO {
 		}
 		
 		
-		//È¸¿øÅ»Åð
+		//È¸ï¿½ï¿½Å»ï¿½ï¿½
 		public int delete(String id) {
 			int cnt = 0;
 			connect();
@@ -221,9 +222,9 @@ public class UserDAO {
 		
 		
 		
-		// 2. DB¿¬°á
-		// 3. SQL Àü¼Û
-		// 4. Á¾·á(¿¬°á ÇØÁ¦)
+		// 2. DBï¿½ï¿½ï¿½ï¿½
+		// 3. SQL ï¿½ï¿½ï¿½ï¿½
+		// 4. ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
 		
 	}
 
