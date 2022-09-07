@@ -50,7 +50,6 @@ public class Script {
 				System.out.printf(story);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

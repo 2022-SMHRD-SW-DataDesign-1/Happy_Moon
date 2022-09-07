@@ -36,39 +36,36 @@ public class SigninController {
 			int cnt = dao.insert(dto); //회원가입
 			
 			if(cnt > 0) {
-				System.out.println("ȸ������ ����");
+				System.out.println("회원 가입 성공");
 			}else {
-				System.out.println("ȸ������ ����");
+				System.out.println("회원 가입 실패");
 			}
 		}
 
-		//ȸ������ ���� ����~ id�� �н����� �ٲ�
 		public void UpdateCon(String id, String pw) {
 			
 			dto = new UserDTO(id, pw); // 2
 			int cnt = dao.update(dto); // 1
 			
 			if(cnt > 0) {
-				System.out.println("ȸ������ �����Ϸ�");
+				System.out.println("정보 수정");
 			}else {
-				System.out.println("ȸ������ ��������");
+				System.out.println("정보 수정 실패");
 			}		
 		}
 
 		
-		//Ư���ι� ���̵�� ã��
 		public void SelectCon(String id) {
 
 			dao.select(id);	
 		}
 		
-		//ȸ�� Ż��
 		public void DeleteCon(String id) {
 			int cnt = dao.delete(id);
 			if(cnt > 0) {
-				System.out.println("Ż�� ����");
+				System.out.println("회원 삭제");
 			}else {
-				System.out.println("Ż�� ����");
+				System.out.println("삭제 실패");
 			}
 		}
 }
