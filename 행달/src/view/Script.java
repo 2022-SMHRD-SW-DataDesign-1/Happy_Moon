@@ -12,14 +12,16 @@ import model.UserDAO;
 public class Script {
 	Connection conn;
 	PreparedStatement psmt = null;
-	ResultSet rs
+
+	ResultSet rs;
 	UserDAO dao = new UserDAO();
 
+
+
+	
 	public void loadScript(int num) {
 		
-		
-		dao.connect();
-		
+		connect();		
 		try {
 			String sql = "select story from story_table where story_num = ?";
 			

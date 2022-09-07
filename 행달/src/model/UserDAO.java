@@ -15,7 +15,7 @@ public class UserDAO {
 		ResultSet rs;
 		boolean result;
 		
-		public void connect() {
+		protected void connect() {
 			try {
 				Class.forName("oracle.jdbc.driver.OracleDriver");
 				
