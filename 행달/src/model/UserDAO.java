@@ -10,8 +10,6 @@ public class UserDAO {
 
 
 // DAO : Data Access Object
-		// Member Table�� data�� �ְ� �޴� ��ɵ��� ��Ƶ� Ŭ����, ��ü
-		// ȸ�����԰� �α��� �뵵�� insert�� select�� ����!! 
 		Connection conn;
 		PreparedStatement psmt = null;
 		ResultSet rs;
@@ -28,13 +26,11 @@ public class UserDAO {
 				conn = DriverManager.getConnection(url, db_id, db_pw);
 				
 			} catch (ClassNotFoundException e) {
-				System.out.println("�ε�����");
+				System.out.println("class not found 오류");
 				e.printStackTrace();
 			} catch (SQLException e) {
-				System.out.println("DB���� ����");
+				System.out.println("DB연결 쿼리 오류");
 				e.printStackTrace();
-			} finally {
-				getClose();
 			}
 		}
 		
@@ -51,7 +47,6 @@ public class UserDAO {
 					conn.close();
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		
@@ -59,11 +54,9 @@ public class UserDAO {
 	
 		public boolean login(String id, String pw) { // boolean -> int (cnt)
 			
-			// boolean result; ���������� ����
 			
 			connect();
 			
-			// ����ǰ��� ȸ�������Ҷ� id�� pw�� ���� �ٲ��� 
 			try {
 				String sql = "select * From User_table where id = ? and pw = ?";
 				psmt = conn.prepareStatement(sql);
@@ -87,14 +80,11 @@ public class UserDAO {
 			return result; // result -> cnt
 		}
 	
-		// insert()	
 		
-		// �ܺο��� �������ؼ� �� �޼ҵ带 ȣ���ؼ� ���Ŵ� String id, String pw, String name, int age 
-		// �׷��� �� 4���� ������ �ѹ��� ���� �� �ִ�.MemberDTO
-		public int insert(UserDTO dto) { // void -> int
-			int cnt = 0;// �ʹݿ�(insert�� ���� ���� ���� int Ÿ������ �� ����)
+		//회원가입
+		public int insert(UserDTO dto) { 
+			int cnt = 0;
 			
-			// 1. �����ε�(�����۾� �ʿ�)
 			connect();
 			
 			try {
@@ -102,6 +92,7 @@ public class UserDAO {
 				String pw = dto.getPw();
 				String name = dto.getName();
 				String save = dto.getAge();
+			
 				
 				String sql = "insert into user_table(user_number,id,pw,name) values(user_id.nextval,?, ?, ?)"; 
 				psmt = conn.prepareStatement(sql);
@@ -110,20 +101,21 @@ public class UserDAO {
 				psmt.setString(2, pw);
 				psmt.setString(3, name);
 				
-				cnt = psmt.executeUpdate(); // ���� �� Login View���� ����� �Ǵ��� �ڵ� �ۼ� �� ����
+				cnt = psmt.executeUpdate(); 
 				
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
 			
 			
-			return cnt;	// �ʹݿ�		
+			return cnt;		
 		}
 		
+		
+		//정보 수정
 		public int update(UserDTO dto) {
-			int cnt = 0; // �굵 ���������� ����� ������
+			int cnt = 0; 
 			connect();
 			
 			try {
@@ -146,7 +138,7 @@ public class UserDAO {
 			return cnt;
 		}
 
-		// ��üȸ�� ��ȸ�ϴ� ���
+		// 사용자 다보기
 		public void selestAll() {
  			connect();
 			
@@ -170,7 +162,7 @@ public class UserDAO {
 			}
 		}
 		
-		// Ư�� ȸ����ȸ���
+		// id로 정보찾기
 		public void select(String id) {
 			connect();
 			
@@ -198,7 +190,7 @@ public class UserDAO {
 		}
 		
 		
-		//ȸ��Ż��
+		//회원 탈퇴
 		public int delete(String id) {
 			int cnt = 0;
 			connect();
@@ -216,15 +208,30 @@ public class UserDAO {
 		}
 		
 		
-		// select()
 		
 		
+		//중복확인
+		public boolean isOverlapped(String id) {
+			connect();
+			try {
+				String isOverlap = "select * from user_table where id = ?";
+				psmt = conn.prepareStatement(isOverlap);
+				psmt.setString(1, id);
+				rs = psmt.executeQuery();
+				if(rs.next()) {
+					return true;
+				}else {
+					return false;
+				}
+			} catch (SQLException e) {
+				System.out.println("DB sql 문법 오 류");
+				e.printStackTrace();
+				return false;
+			}
+	
+		}
 		
 		
-		
-		// 2. DB����
-		// 3. SQL ����
-		// 4. ����(���� ����)
 		
 	}
 

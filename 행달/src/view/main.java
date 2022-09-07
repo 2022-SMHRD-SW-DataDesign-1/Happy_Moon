@@ -43,52 +43,56 @@ public class main {
 	
 	public static void view() {
 		dotArt art = new dotArt();
-		UserDAO dao = new UserDAO();  // ���߿� �ø���
+		UserDAO dao = new UserDAO(); 
 		UserDTO dto = null;
 		
 		
 		
 		
 
-		// controller�� ������ �� �ִ� ��ü ����
 		SigninController lm = new SigninController();
 		
 		Scanner sc= new Scanner(System.in);
 		boolean flag = true;
 		
-		//� ���·� ȭ���� ������ ���ΰ�?
 		art.init();
-		System.out.println("======�ƹ�ư ���������̿�======");
+		System.out.println("======아무튼 공포 게임======");
 		while(flag) {
 			System.out.println();
-			//�޴� ���
-			System.out.println("[1]�α��� [2]ȸ������ [3]����");
-			//�α��� -> select, ȸ������->insert, �������� ->update, ��ȸ->select , ȸ�� Ż��->delete.4
+			System.out.println("[1]로그인 [2]회원 가입 [3]종료");
 			
-			System.out.print("�޴��� ���� ���ּ��� >>");
+			System.out.print("메뉴를 선택해 주세요 >>");
 			String menu = sc.next();
 			
 			if(menu.equals("3")) {
 				flag=false;
-			}else if(menu.equals("2")) {//ȸ������
-				System.out.print("���̵� �Է� : ");
+			}else if(menu.equals("2")) {//회원 가입
+				System.out.print("아이디를 입력해 주세요 : ");
 				String id = sc.next();
-				System.out.print("��й�ȣ �Է� : ");
+				while(dao.isOverlapped(id)) {
+						System.out.print("\n중복된 아이디 입니다!\n다른 아이디를 입력해 주세요>>");
+						id = sc.next();
+						if(!dao.isOverlapped(id)) {
+							System.out.println("사용 가능한 아이디 입니다!");
+							break;
+						}
+				}
+				System.out.print("비밀번호를 입력해 주세요 : ");
 				String pw = sc.next();
-				System.out.print("�̸� �Է� : ");
+				System.out.print("이름을 입력해 주세요 : ");
 				String name = sc.next();
 				lm.InsertCon(id, pw, name);
 				
 				
-			}else if(menu.equals("1")) {//�α���
-				System.out.print("���̵� �Է� : ");
+			}else if(menu.equals("1")) {
+				System.out.print("아이디를 입력해 주세요 : ");
 				String id = sc.next();
-				System.out.print("��й�ȣ �Է� : ");
+				System.out.print("비밀번호를 입력해 주세요 : ");
 				String pw = sc.next();
 				lm.LoginCon(id, pw);
 				
 				while(flag) {
-					System.out.println("[1]�����ϱ� [2]�̾��ϱ� [3]����");
+					System.out.println("[1]게임 시작  [2]새로하기  [3] 이어하기");
 					String menu2 = sc.next();
 					if(menu2.equals("1")) {
 						
@@ -97,7 +101,7 @@ public class main {
 					}else if(menu2.equals("3")) {
 						
 					}else {
-						System.out.println("����");
+						System.out.println("어허 1~3");
 					}
 				}
 				
@@ -105,12 +109,12 @@ public class main {
 				
 				
 			}else {
-				System.out.println("���� 1~3 -> ���� �����ϼ̽��ϴ�.");
+				System.out.println("어허");
 			}
 			
 		}
 		
-		System.out.println("�� �� �� �� ����������");
+		System.out.println("끝ㅋㅋ");
 
 	}
 	
