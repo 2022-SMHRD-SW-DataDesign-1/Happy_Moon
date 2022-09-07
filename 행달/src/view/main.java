@@ -56,14 +56,16 @@ public class main {
 			}else if(menu.equals("2")) {//회원 가입
 				System.out.print("아이디를 입력해 주세요 : ");
 				String id = sc.next();
-				while(dao.isOverlapped(id)) {
+				if(!dao.isOverlapped(id)) {
+					System.out.println("사용 가능한 아이디 입니다!");
+					break;
+				}else {
+					while(dao.isOverlapped(id)) {
 						System.out.print("\n중복된 아이디 입니다!\n다른 아이디를 입력해 주세요>>");
 						id = sc.next();
-						if(!dao.isOverlapped(id)) {
-							System.out.println("사용 가능한 아이디 입니다!");
-							break;
-						}
+					}
 				}
+				
 				System.out.print("비밀번호를 입력해 주세요 : ");
 				String pw = sc.next();
 				System.out.print("이름을 입력해 주세요 : ");
