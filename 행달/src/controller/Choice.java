@@ -40,14 +40,17 @@ public class Choice {
 		this.next = next;
 	}
 
-	public void choice(int choice) {
+	public int choice(int choice) {
 		
 		sequence++;
 		if (choice == 1) {
 			setNext((sequence)*10);
-//			dto.setSave((sequence)*10) // 여기에 이걸 저장하는데 성공만하면 그냥 불러올 수있어
+			return (sequence)*10;
 		} else if (choice == 2) {
 			setNext((sequence));
+			return (sequence);
+		}else {
+			return sequence;
 		}
 
 		
