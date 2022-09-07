@@ -1,12 +1,9 @@
 package view;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import controller.Choice;
+import controller.Music;
 import controller.SigninController;
 import model.UserDAO;
 import model.UserDTO;
@@ -24,6 +21,7 @@ public class main {
 		Choice ch = new Choice();
 		Script scr = new Script();
 		UserDAO dao = new UserDAO();
+		Music bgm = new Music();// 브금 재생용 객체 컨트롤러에 Music 클래스 있습니다.
 
 		//
 		String[] summary = new String[20];
@@ -31,6 +29,7 @@ public class main {
 		//
 
 		//
+		bgm.play(1);
 		scr.loadScript(ch.getNext());
 		summary[index] = scr.saveSummary(ch.getNext());
 		//
@@ -38,7 +37,6 @@ public class main {
 
 		while (ch.getNext() <= 110) {
 			System.out.println();
-			// System.out.println("전의 값" + ch.getNext());
 			System.out.print("당신의 선택은 >>");
 			int i = sc.nextInt();
 
@@ -55,7 +53,7 @@ public class main {
 			// if문으로 감쌀꺼
 			scr.insertDB(scr.sumSummary(summary), dto.getId());
 			// 테스트출력
-			System.out.println(scr.getSummary(dto.getId()));
+			System.out.println(scr.getSummary(dto.getId())); // <<== 이게 summary 출력용 코드 지우면 저거 없어짐
 
 			if (ch.getNext() == 52 || ch.getNext() == 110) {
 				scr.getSummary(dto.getId());
@@ -73,8 +71,11 @@ public class main {
 		Choice ch = new Choice();
 		Script scr = new Script();
 		UserDAO dao = new UserDAO();
+		Music bgm = new Music();// 브금 재생용 객체 컨트롤러에 Music 클래스 있습니다.
+
 
 		//
+		bgm.play(1);
 		String[] summary = new String[20];
 		int index = 0;
 		//
@@ -102,13 +103,13 @@ public class main {
 
 				//
 				index++;
-				summary[index] = scr.saveSummary(ch.getNext());
+				summary[index] = scr.saveSummary(ch.getNext()); 
 				//
 
 				// if문으로 감쌀거?
 				scr.insertDB(scr.sumSummary(summary), dto.getId());
 				// 테스트출력
-				System.out.println(scr.getSummary(dto.getId()));
+				System.out.println(scr.getSummary(dto.getId())); // <<== 이게 summary 출력용 코드 지우면 저거 없어짐
 				
 
 				if (ch.getNext() == 52 || ch.getNext() == 110) {
