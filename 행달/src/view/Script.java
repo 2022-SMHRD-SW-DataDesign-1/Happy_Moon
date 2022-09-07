@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.DriverManager;
 
-import model.SummaryDAO;
 import model.UserDAO;
 
 public class Script {
@@ -16,7 +15,7 @@ public class Script {
 	ResultSet rs;
 	UserDAO dao = new UserDAO();
 
-	public void loadScript(int num, SummaryDAO sdao) {
+	public void loadScript(int num) {
 
 		connect();
 		try {
@@ -45,6 +44,27 @@ public class Script {
 			e.printStackTrace();
 		}
 	}
+	
+	public String saveSummary(int num) {
+		connect();
+		try {
+			String sql = "select summary from story_table where story_num = ?";
+
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, num);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				return rs.getString("summary");
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	
+		
+	}
 
 	public void connect() {
 		try {
@@ -64,4 +84,69 @@ public class Script {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	
+	
+	public String getSummary(String id) {
+		connect();
+		try {
+			String sql = "SELECT story from user_table where id = ?";
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1,id);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				return rs.getString("story");
+			}
+			
+			
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	
+	
+	
+
+	//저장한 String을 합쳐서
+	public void insertDB(String sum, String id) {
+		connect();
+		try {
+			String sql = "update user_table set story = ? where id = ?";
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1,sum);
+			psmt.setString(2, id);
+			
+			rs = psmt.executeQuery();
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+
+	}
+	
+	public String sumSummary(String[] summary) {
+		String sum ="";
+		for(String temp : summary) {
+			if(temp != null) {
+				sum+=temp+" "; 
+			}
+		}
+		
+		return sum;
+	
+}
+	
 }

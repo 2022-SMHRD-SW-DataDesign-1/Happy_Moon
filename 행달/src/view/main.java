@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 import controller.Choice;
 import controller.SigninController;
-import model.SummaryDAO;
 import model.UserDAO;
 import model.UserDTO;
 
@@ -27,22 +26,47 @@ public class main {
 		Choice ch = new Choice();
 		Script scr = new Script();
 		UserDAO dao = new UserDAO();
-		SummaryDAO sdao = new SummaryDAO();
-		scr.loadScript(ch.getNext(),sdao);
 		
+		//
+		String[] summary = new String[20];
+		int index = 0;
+		//
+		
+		//
+		scr.loadScript(ch.getNext());
+		summary[index] = scr.saveSummary(ch.getNext());
+		//
 
 		while (ch.getNext() <= 110) {
 
 			System.out.println();
 			//System.out.println("전의 값" + ch.getNext());
 			System.out.print("당신의 선택은 >>");
-			
+			int i = sc.nextInt();
 
-			dto.setSave(ch.choice(sc.nextInt()));
+			dto.setSave(ch.choice(i));
 			dao.saveData(dto.getSave(), dto.getId());
 			
-			scr.loadScript(ch.getNext(),sdao);
+			//
+			scr.loadScript(ch.getNext());
+			summary[index] =scr.saveSummary(ch.getNext());
+			index++;
+			//
+			for(String temp:summary) {
+				System.out.println(temp+"==========================나오나요?=======================");
+			}
+			
+			if(i==3) {
+				
+				scr.insertDB(scr.sumSummary(summary), dto.getId());
+				//테스트출력
+				scr.getSummary(dto.getId());
+				break;
+			}
+			
+			
 			if(ch.getNext() == 52 || ch.getNext() == 110) {
+				scr.getSummary(dto.getId());
 				break;
 			}
 		}
@@ -52,28 +76,47 @@ public class main {
 		Choice ch = new Choice();
 		Script scr = new Script();
 		UserDAO dao = new UserDAO();
-		SummaryDAO sdao = new SummaryDAO();
+		
+		//
+		String[] summary = new String[20];
+		int index = 0;
+		//
+		
+		summary[index] =scr.getSummary(dto.getId());
+		index++;
+		
 
 		System.out.println("========== 지난 이야기를 불러옵니다 ==========\n");
 			
 			ch.setNext(save);
-			scr.loadScript(ch.getNext(),sdao);
+			scr.loadScript(ch.getNext());
 			
 			while (ch.getNext() <= 110) {
-
-				
-
 				
 
 				System.out.println();
 				//System.out.println("전의 값" + ch.getNext());
 				System.out.print("당신의 선택은 >>");
-				
+				int i = sc.nextInt();
 
-				dto.setSave(ch.choice(sc.nextInt()));
+				dto.setSave(ch.choice(i));
 				dao.saveData(dto.getSave(), dto.getId());
+				scr.loadScript(ch.getNext());
 				
-				scr.loadScript(ch.getNext(),sdao);
+				//
+				summary[index] =scr.saveSummary(ch.getNext());
+				index++;
+				//
+				
+		
+				if(i==3) {
+					
+					scr.insertDB(scr.sumSummary(summary), dto.getId());
+					//테스트출력
+					scr.getSummary(dto.getId());
+					break;
+				}
+				
 				if(ch.getNext() == 52 || ch.getNext() == 110) {
 					break;
 				}
