@@ -1,16 +1,20 @@
 package view;
 
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Scanner;
 
-import controller.Choice;
+
 import controller.SigninController;
-import model.StoryDAO;
+
 import model.UserDAO;
 import model.UserDTO;
-import controller.Choice;
+
 
 public class main {
+	;
 
 	public static void main(String[] args) {
 		Script scr = new Script();

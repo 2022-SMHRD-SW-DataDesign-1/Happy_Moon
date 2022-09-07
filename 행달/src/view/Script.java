@@ -12,7 +12,7 @@ import model.UserDAO;
 public class Script {
 	Connection conn;
 	PreparedStatement psmt = null;
-	ResultSet rs;
+	ResultSet rs
 	UserDAO dao = new UserDAO();
 
 	public void loadScript(int num) {
@@ -35,6 +35,24 @@ public class Script {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void connect() {
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			
+			String url = "jdbc:oracle:thin:@project-db-stu.ddns.net:1524:xe";
+			String db_id = "campus_g_0830_6";
+			String db_pw = "smhrd6";
+				
+			conn = DriverManager.getConnection(url, db_id, db_pw);
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println("class not found 오류");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("DB연결 쿼리 오류");
 			e.printStackTrace();
 		}
 	}
