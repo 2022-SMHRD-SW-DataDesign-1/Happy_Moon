@@ -45,7 +45,7 @@ public class main {
 			dao.saveData(dto.getSave(), dto.getId());
 			
 			scr.loadScript(ch.getNext());
-			if(ch.getNext() == 52 || ch.getNext() == 110) {
+			if(ch.getNext() == 52 || ch.getNext() == 110 || ch.getNext()==319) {
 				break;
 			}
 		}
@@ -61,7 +61,7 @@ public class main {
 			ch.setNext(save);
 			scr.loadScript(ch.getNext());
 			
-			while (ch.getNext() <= 110) {
+			while (true) {
 
 				
 

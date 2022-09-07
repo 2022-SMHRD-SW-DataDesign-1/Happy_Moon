@@ -32,7 +32,7 @@ public class Script {
 				for (char temp : forShow) {
 					System.out.print(temp);
 					try {
-						Thread.sleep(30);						
+						Thread.sleep(0);						
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 					e.printStackTrace();				}
