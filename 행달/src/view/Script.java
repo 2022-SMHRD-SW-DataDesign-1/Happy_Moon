@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.DriverManager;
 
+import model.SummaryDAO;
 import model.UserDAO;
 
 public class Script {
@@ -15,7 +16,7 @@ public class Script {
 	ResultSet rs;
 	UserDAO dao = new UserDAO();
 
-	public void loadScript(int num) {
+	public void loadScript(int num, SummaryDAO sdao) {
 
 		connect();
 		try {
@@ -28,6 +29,7 @@ public class Script {
 
 			if (rs.next()) {
 				String story = rs.getString(1);
+
 				char[] forShow = story.toCharArray();
 				for (char temp : forShow) {
 					System.out.print(temp);

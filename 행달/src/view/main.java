@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 import controller.Choice;
 import controller.SigninController;
-
+import model.SummaryDAO;
 import model.UserDAO;
 import model.UserDTO;
 
@@ -27,14 +27,11 @@ public class main {
 		Choice ch = new Choice();
 		Script scr = new Script();
 		UserDAO dao = new UserDAO();
-		scr.loadScript(ch.getNext());
+		SummaryDAO sdao = new SummaryDAO();
+		scr.loadScript(ch.getNext(),sdao);
 		
 
 		while (ch.getNext() <= 110) {
-
-			
-
-			
 
 			System.out.println();
 			//System.out.println("전의 값" + ch.getNext());
@@ -44,7 +41,7 @@ public class main {
 			dto.setSave(ch.choice(sc.nextInt()));
 			dao.saveData(dto.getSave(), dto.getId());
 			
-			scr.loadScript(ch.getNext());
+			scr.loadScript(ch.getNext(),sdao);
 			if(ch.getNext() == 52 || ch.getNext() == 110) {
 				break;
 			}
@@ -55,11 +52,12 @@ public class main {
 		Choice ch = new Choice();
 		Script scr = new Script();
 		UserDAO dao = new UserDAO();
+		SummaryDAO sdao = new SummaryDAO();
 
 		System.out.println("========== 지난 이야기를 불러옵니다 ==========\n");
 			
 			ch.setNext(save);
-			scr.loadScript(ch.getNext());
+			scr.loadScript(ch.getNext(),sdao);
 			
 			while (ch.getNext() <= 110) {
 
@@ -75,7 +73,7 @@ public class main {
 				dto.setSave(ch.choice(sc.nextInt()));
 				dao.saveData(dto.getSave(), dto.getId());
 				
-				scr.loadScript(ch.getNext());
+				scr.loadScript(ch.getNext(),sdao);
 				if(ch.getNext() == 52 || ch.getNext() == 110) {
 					break;
 				}
@@ -163,6 +161,7 @@ public class main {
 		}
 
 		System.out.println("끝ㅋㅋ");
+		dao.getClose();
 
 	}
 
