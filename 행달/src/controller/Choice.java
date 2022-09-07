@@ -69,7 +69,7 @@ public class Choice {
 					|| next == 90 || next == 100) {
 				setNext(next + (next / 10));
 			} else {
-				this.next = sequence + 1;
+				this.next = next + 1;
 			}
 		}
 		return next;
