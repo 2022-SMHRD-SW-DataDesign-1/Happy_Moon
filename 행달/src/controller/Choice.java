@@ -54,8 +54,9 @@ public class Choice {
 			System.out.println("next값" + next);
 			if (next == 10) {
 				setNext(sequence * 10);
-			}
 
+
+			} 
 			else if (next == 22) {
 				setNext(42);
 			} else if (next == 42 || next == 32) {
