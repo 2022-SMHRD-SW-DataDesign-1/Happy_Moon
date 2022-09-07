@@ -21,21 +21,37 @@ public class main {
 
 	}
 	
-	public static void gameStart() {
+	
+	
+	public static void gameStart(UserDTO dto) {
 		Choice ch = new Choice();
 		Script scr = new Script();
-		
+		UserDAO dao = new UserDAO();
 		scr.loadScript(ch.getNext());
 
 		while (ch.getNext() < 100) {
-
+			dto.setSave(ch.getSequence());
+			
+			
 			System.out.println();
 			System.out.print("당신의 선택은 >>");
 			ch.choice(sc.nextInt());
-				
+			dao.saveData(dto.getSave(), dto.getId());
 			scr.loadScript(ch.getNext());
 			
 		}
+	}
+	
+	public static void gameStartFrom(int save) {
+		Choice ch = new Choice();
+		Script scr = new Script();
+		
+
+		System.out.println("========== 지난 이야기를 불러옵니다 ==========\n");
+			
+			ch.setNext(save);
+			scr.loadScript(ch.getNext());
+			
 	}
 	
 	
@@ -51,11 +67,11 @@ public class main {
 		
 		boolean flag = true;
 
-		art.init();
+//		art.init();
 		System.out.println("======아무튼 공포 게임======");
 		while (flag) {
 			System.out.println();
-			System.out.println("[1]로그인 [2]회원 가입 [3]종료");
+			System.out.println("[1]로그인  [2]회원가입  [3]종료");
 
 			System.out.print("메뉴를 선택해 주세요 >>");
 			String menu = sc.next();
@@ -67,7 +83,6 @@ public class main {
 				String id = sc.next();
 				if (!dao.isOverlapped(id)) {
 					System.out.println("사용 가능한 아이디 입니다!");
-					break;
 				} else {
 					while (dao.isOverlapped(id)) {
 						System.out.print("\n중복된 아이디 입니다!\n다른 아이디를 입력해 주세요>>");
@@ -86,24 +101,31 @@ public class main {
 				String id = sc.next();
 				System.out.print("비밀번호를 입력해 주세요 : ");
 				String pw = sc.next();
-				lm.LoginCon(id, pw);
-
-				while (flag) {
-					System.out.println("[1]게임 시작  [2]새로하기  [3] 이어하기");
-					String menu2 = sc.next();
-					if (menu2.equals("1")) {
-						gameStart();
-					} else if (menu2.equals("2")) {
-
-					} else if (menu2.equals("3")) {
-
-					} else {
-						System.out.println("어허 1~3");
+				dto = new UserDTO(id, pw);
+				if(lm.LoginCon(id, pw)) {//로그인 성공시
+					
+					while (flag) {
+						System.out.println("[1]새로하기  [2]이어하기  [3]로그아웃");
+						String menu2 = sc.next();
+						if (menu2.equals("1")) {
+							gameStart(dto);
+						} else if (menu2.equals("2")) {
+							gameStartFrom(dao.loadData(id));
+							gameStart(dto);
+							
+						} else if (menu2.equals("3")) {
+							System.out.println("로그아웃 되었습니다.");
+							break;
+							
+						} else {
+							System.out.println("어허 1~3");
+						}
 					}
 				}
 
+
 			} else {
-				System.out.println("어허");
+				System.out.println("어허 1~3");
 			}
 
 		}

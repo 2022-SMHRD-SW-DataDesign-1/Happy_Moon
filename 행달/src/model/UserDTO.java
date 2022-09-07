@@ -1,15 +1,12 @@
 package model;
 
 		// DTO : Data Transfer Object
-		// Member Table data�� �ְ� �޴� �뵵! - ��ü, Ŭ����
 public class UserDTO {
-	// main X 
 	
-	// �ʵ� �ʿ�(�Ӽ�)
 	private String id;
 	private String pw;
 	private String name;
-	private String save;
+	private int save;
 	
 	
 	public UserDTO(String id, String pw, String name) {
@@ -49,11 +46,11 @@ public class UserDTO {
 		this.name = name;
 	}
 
-	public String getAge() {
+	public int getSave() {
 		return save;
 	}
 
-	public void setAge(String save) {
+	public void setSave(int save) {
 		this.save = save;
 	}
 	
