@@ -33,7 +33,16 @@ public class Script {
 			
 			if(rs.next()) {
 				String story = rs.getString(1);
-				System.out.printf(story);
+				char[] forShow =story.toCharArray();
+				for(char temp : forShow) {
+					try {
+						Thread.sleep(50);
+						System.out.print(temp);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
