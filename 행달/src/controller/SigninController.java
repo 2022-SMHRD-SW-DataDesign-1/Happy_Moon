@@ -5,77 +5,70 @@ import model.UserDTO;
 
 public class SigninController {
 		
-		// DAO¿¡ Á¢±ÙÇÒ ¼ö ÀÖ´Â °´Ã¼ »ý¼º
 		UserDAO dao = new UserDAO();
 		
-		// DTO¿¡ Á¢±ÙÇÒ ¼ö ÀÖ´Â °´Ã¼ »ý¼º
-		UserDTO dto; // = new MemberDTO(id, pw); // ¿©·¯°Ô ¸Þ¼ÒµåÀÖÀ½ -> ¼±ÅÃÇØ¾ßÇÔ , ±¸Ã¼ÀûÀÎ ¸Å°³º¯¼öÀÇ °³¼ö´Â ±â´É¿¡ µû¶ó ´Ù¸£°Ô ÁÖ°Ù´Ù
+		UserDTO dto; // = new MemberDTO(id, pw); 
 		
 
-		// Main ¸Þ¼Òµå¿¡¼­ ·Î±×ÀÎÀ» ½ÇÇà ½Ã
-		// ¾ÆÀÌµð¿Í ºñ¹Ð¹øÈ£¸¦ ¹Þ¾Æ¿Í DAO ·Î ¿¬°áÇØÁÖ´Â ¸Þ¼Òµå »ý¼º
 		
 		
 		
 		
-		//dao¶û controller¶û ÁÖ°í¹Þ±â ·Î±×ÀÎÀº ¼º°øÇÏ¿´´Â°¡
+		//ë©”ì¸ì—ì„œ ë¡œê·¸ì¸ê¸°ëŠ¥ í• ë•Œ daoê¸°ëŠ¥ í˜¸ì¶œ ì„±ê³µ ì‹¤íŒ¨ ì—¬ë¶€ ë°˜í™˜
 		public boolean LoginCon(String id, String pw) {
-			// DAO¿¡ ÀÖ´Â login()
 			boolean result = dao.login(id, pw);
 			
-			// ·Î±×ÀÎ ±â´ÉÀº ÇöÀç °¡Áö°í ÀÖ´Â member Å×ÀÌºí¿¡ 
-			// id, pw¿Í µ¿ÀÏÇÏ°Ô µé¾î°¡ ÀÖ´Â ³»¿ëÀÌ ÀÖ´ÂÁö ¾ø´ÂÁö È®ÀÎ ÈÄ
-			// °á°ú°ª ¹ÝÈ¯
-			if(result) { // cnt·Îµµ ¹Ù²ãº¸±â
-				System.out.println("·Î±×ÀÎ ¼º°ø");
+			if(result) {
+				System.out.println("ë¡œê·¸ì¸ ì„±ê³µ");
 			}else {
-				System.out.println("·Î±×ÀÎ ½ÇÆÐ");
+				System.out.println("ë¡œê·¸ì¸ ì‹¤íŒ¨");
 			}
 			
 			return result;
 		}
 		
 		
-		//È¸¿ø°¡ÀÔÀ»ÇÒ²¨¿©
+		
+		// íšŒì›ê°€ìž…ì´ìš”
 		public void InsertCon(String id, String pw, String name) {
-			dto = new UserDTO(id, pw, name); // »ý¼ºÀÚ ¸Þ¼Òµå
+			dto = new UserDTO(id, pw, name);
 			
-			int cnt = dao.insert(dto); // sql¸¸µé±â
+			int cnt = dao.insert(dto); //íšŒì›ê°€ìž…
 			
 			if(cnt > 0) {
-				System.out.println("È¸¿ø°¡ÀÔ ¼º°ø");
+				System.out.println("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 			}else {
-				System.out.println("È¸¿ø°¡ÀÔ ½ÇÆÐ");
+				System.out.println("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 			}
 		}
 
-		//È¸¿øÁ¤º¸ ¼öÁ¤ ¤»¤»~ id¶û ÆÐ½º¿öµå ¹Ù²Þ
+		//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½~ idï¿½ï¿½ ï¿½Ð½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½
 		public void UpdateCon(String id, String pw) {
 			
 			dto = new UserDTO(id, pw); // 2
 			int cnt = dao.update(dto); // 1
 			
 			if(cnt > 0) {
-				System.out.println("È¸¿øÁ¤º¸ ¼öÁ¤¿Ï·á");
+				System.out.println("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½");
 			}else {
-				System.out.println("È¸¿øÁ¤º¸ ¼öÁ¤½ÇÆÐ");
+				System.out.println("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 			}		
 		}
 
 		
-		//Æ¯Á¤ÀÎ¹° ¾ÆÀÌµð·Î Ã£±â
+		//Æ¯ï¿½ï¿½ï¿½Î¹ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½ Ã£ï¿½ï¿½
 		public void SelectCon(String id) {
 
 			dao.select(id);	
 		}
 		
-		//È¸¿ø Å»Åð
+		//È¸ï¿½ï¿½ Å»ï¿½ï¿½
 		public void DeleteCon(String id) {
 			int cnt = dao.delete(id);
 			if(cnt > 0) {
-				System.out.println("Å»Åð ¼º°ø");
+				System.out.println("Å»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 			}else {
-				System.out.println("Å»Åð ½ÇÆÐ");
+				System.out.println("Å»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 			}
 		}
 }
