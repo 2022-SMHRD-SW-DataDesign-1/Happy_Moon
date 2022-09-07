@@ -12,8 +12,44 @@ import model.UserDAO;
 public class Script {
 	Connection conn;
 	PreparedStatement psmt = null;
-	ResultSet rs;
 
+	ResultSet rs;
+	UserDAO dao = new UserDAO();
+
+
+
+	
+	public void loadScript(int num) {
+		
+		connect();		
+		try {
+			String sql = "select story from story_table where story_num = ?";
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, num);
+		
+			
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				String story = rs.getString(1);
+				char[] forShow =story.toCharArray();
+				for(char temp : forShow) {
+					try {
+						Thread.sleep(50);
+						System.out.print(temp);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	
 	public void connect() {
 		try {
@@ -30,26 +66,6 @@ public class Script {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			System.out.println("DB연결 쿼리 오류");
-			e.printStackTrace();
-		}
-	}
-	public void loadScript(int num) {
-		
-		connect();		
-		try {
-			String sql = "select story from story_table where story_num = ?";
-			
-			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, num);
-		
-			
-			rs = psmt.executeQuery();
-			
-			if(rs.next()) {
-				String story = rs.getString(1);
-				System.out.printf(story);
-			}
-		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}

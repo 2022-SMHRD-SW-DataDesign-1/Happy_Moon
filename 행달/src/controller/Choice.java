@@ -5,10 +5,10 @@ import model.UserDAO;
 
 public class Choice {
 
-	private int sequence;
+	private int sequence = 1;
 	private int choice;
 	private DynamicArr summary;
-	private int next;
+	private int next = 10;
 
 	public int getSequence() {
 		return sequence;
@@ -26,21 +26,18 @@ public class Choice {
 		return next;
 	}
 
-	public Choice() {
+	public void choice(int choice) {
+		
+		sequence++;
 		if (choice == 1) {
-			this.next = (sequence + 1) * 10;
+			this.next = (sequence)*10;
 		} else if (choice == 2) {
-			this.next = sequence + 1;
+			this.next = sequence;
 		}
 
-		this.choice = choice;
-		summary.add(sequence);
-
+		
 	}
 
-	public int user_choice(int choice) {
-		summary.add(choice);
-		return choice;
-	}
+	
 
 }
