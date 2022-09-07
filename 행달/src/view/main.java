@@ -13,118 +13,118 @@ import model.UserDTO;
 
 public class main {
 	static Scanner sc = new Scanner(System.in);
+
 	public static void main(String[] args) {
-		
-	
+
 		view();
 
 	}
-	
-	
-	
+
 	public static void gameStart(UserDTO dto) {
 		Choice ch = new Choice();
 		Script scr = new Script();
 		UserDAO dao = new UserDAO();
-		
+
 		//
 		String[] summary = new String[20];
 		int index = 0;
 		//
-		
+
 		//
 		scr.loadScript(ch.getNext());
 		summary[index] = scr.saveSummary(ch.getNext());
 		//
+		
 
 		while (ch.getNext() <= 110) {
-
 			System.out.println();
-			//System.out.println("전의 값" + ch.getNext());
+			// System.out.println("전의 값" + ch.getNext());
 			System.out.print("당신의 선택은 >>");
 			int i = sc.nextInt();
 
-			dto.setSave(ch.choice(i));
+			scr.loadScript(ch.choice(i));
+			dto.setSave(ch.getNext());
+
 			dao.saveData(dto.getSave(), dto.getId());
-			
+
 			//
-			scr.loadScript(ch.getNext());
-			summary[index] =scr.saveSummary(ch.getNext());
 			index++;
+			summary[index] = scr.saveSummary(ch.getNext());
 			//
-			for(String temp:summary) {
-				System.out.println(temp+"==========================나오나요?=======================");
-			}
-			
-			if(i==3) {
-				
-				scr.insertDB(scr.sumSummary(summary), dto.getId());
-				//테스트출력
+
+			// if문으로 감쌀꺼
+			scr.insertDB(scr.sumSummary(summary), dto.getId());
+			// 테스트출력
+			System.out.println(scr.getSummary(dto.getId()));
+
+			if (ch.getNext() == 52 || ch.getNext() == 110) {
 				scr.getSummary(dto.getId());
-				break;
-			}
-			
-			
-			if(ch.getNext() == 52 || ch.getNext() == 110) {
-				scr.getSummary(dto.getId());
-				break;
+
+				scr.loadScript(ch.getNext());
+				if (ch.getNext() == 52 || ch.getNext() == 110 || ch.getNext() == 319) {
+
+					break;
+				}
 			}
 		}
 	}
-	
-	public static void gameStartFrom(int save,UserDTO dto ) {
+
+	public static void gameStartFrom(int save, UserDTO dto) {
 		Choice ch = new Choice();
 		Script scr = new Script();
 		UserDAO dao = new UserDAO();
-		
+
 		//
 		String[] summary = new String[20];
 		int index = 0;
 		//
-		
-		summary[index] =scr.getSummary(dto.getId());
+
+		summary[index] = scr.getSummary(dto.getId());
 		index++;
-		
 
 		System.out.println("========== 지난 이야기를 불러옵니다 ==========\n");
-			
-			ch.setNext(save);
-			scr.loadScript(ch.getNext());
-			
-			while (ch.getNext() <= 110) {
-				
+
+		ch.setNext(save);
+		scr.loadScript(ch.getNext());
+
+		while (ch.getNext() <= 110) {
+
+			while (true) {
 
 				System.out.println();
-				//System.out.println("전의 값" + ch.getNext());
+				// System.out.println("전의 값" + ch.getNext());
 				System.out.print("당신의 선택은 >>");
 				int i = sc.nextInt();
 
 				dto.setSave(ch.choice(i));
 				dao.saveData(dto.getSave(), dto.getId());
 				scr.loadScript(ch.getNext());
-				
+
 				//
-				summary[index] =scr.saveSummary(ch.getNext());
 				index++;
+				summary[index] = scr.saveSummary(ch.getNext());
 				//
+
+				// if문으로 감쌀거?
+				scr.insertDB(scr.sumSummary(summary), dto.getId());
+				// 테스트출력
+				System.out.println(scr.getSummary(dto.getId()));
 				
-		
-				if(i==3) {
-					
-					scr.insertDB(scr.sumSummary(summary), dto.getId());
-					//테스트출력
-					scr.getSummary(dto.getId());
+
+				if (ch.getNext() == 52 || ch.getNext() == 110) {
 					break;
 				}
-				
-				if(ch.getNext() == 52 || ch.getNext() == 110) {
+				dto.setSave(ch.choice(sc.nextInt()));
+				dao.saveData(dto.getSave(), dto.getId());
+
+				scr.loadScript(ch.getNext());
+				if (ch.getNext() == 52 || ch.getNext() == 110) {
 					break;
 				}
 			}
-			
+
+		}
 	}
-	
-	
 
 	public static void view() {
 
@@ -134,7 +134,6 @@ public class main {
 
 		SigninController lm = new SigninController();
 
-		
 		boolean flag = true;
 
 //		art.init();
@@ -172,30 +171,29 @@ public class main {
 				System.out.print("비밀번호를 입력해 주세요 : ");
 				String pw = sc.next();
 				dto = new UserDTO(id, pw);
-				if(lm.LoginCon(id, pw)) {//로그인 성공시
-					
+				if (lm.LoginCon(id, pw)) {// 로그인 성공시
+
 					while (flag) {
 						System.out.println("\n[1]새로하기  [2]이어하기  [3]로그아웃");
 						String menu2 = sc.next();
 						if (menu2.equals("1")) {
 							gameStart(dto);
 						} else if (menu2.equals("2")) {
-							if(dao.loadData(id) == 0) {
+							if (dao.loadData(id) == 0) {
 								System.out.println("지난 플레이 정보가 존재하지 않습니다.");
-							}else {
-								gameStartFrom(dao.loadData(id),dto);
+							} else {
+								gameStartFrom(dao.loadData(id), dto);
 							}
-							
+
 						} else if (menu2.equals("3")) {
 							System.out.println("로그아웃 되었습니다.");
 							break;
-							
+
 						} else {
 							System.out.println("어허 1~3");
 						}
 					}
 				}
-
 
 			} else {
 				System.out.println("어허 1~3");

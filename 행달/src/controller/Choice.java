@@ -42,6 +42,12 @@ public class Choice {
 
 		sequence++;
 		if (choice == 1) {
+			if (next == 320) {
+
+				setNext(next - 1);
+			} else if (next == 88) {
+				setNext(90);
+			}
 			this.next = (next) + 10;
 			System.out.println(next);
 			setNext(next);
@@ -51,11 +57,19 @@ public class Choice {
 			if (next == 10) {
 				setNext(sequence * 10);
 
+			} else if (next == 88) {
+				setNext(90);
+			} else if (next == 87) {
+				setNext(78);
+			} else if (next == 22) {
+				setNext(42);
+			} else if (next == 42 || next == 32 || next == 45) {
+				setNext(next * 10);
 			} else if (next == 20 || next == 30 || next == 40 || next == 50 || next == 60 || next == 70 || next == 80
 					|| next == 90 || next == 100) {
 				setNext(next + (next / 10));
 			} else {
-				this.next = sequence + 1;
+				this.next = next + 1;
 			}
 		}
 		return next;
