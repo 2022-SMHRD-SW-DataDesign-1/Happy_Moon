@@ -13,7 +13,8 @@ import controller.Choice;
 public class main {
 
 	public static void main(String[] args) {
-	
+		Script scr = new Script();
+		scr.loadScript(20);
 		view();
 	
 		
@@ -22,18 +23,7 @@ public class main {
 	
 	
 	
-	public static int choice() {
-		 Choice user_cho = new Choice();
-		if( == 1) {
-		Choice user_cho1 = new Choice(1);
-		} else if(num == 2) {
-			Choice user_cho = new Choice(2);
-		} else System.out.println("잘못입력하셨습니다.");
-		
-		
-		return user_cho.getNext();
-		
-	}
+	
 	
 	
 	
@@ -42,6 +32,8 @@ public class main {
 	
 	
 	public static void view() {
+		
+		
 		dotArt art = new dotArt();
 		UserDAO dao = new UserDAO(); 
 		UserDTO dto = null;
@@ -96,6 +88,7 @@ public class main {
 					String menu2 = sc.next();
 					if(menu2.equals("1")) {
 						
+
 					}else if(menu2.equals("2")) {
 						
 					}else if(menu2.equals("3")) {
