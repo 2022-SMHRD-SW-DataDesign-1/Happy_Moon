@@ -9,25 +9,20 @@ import java.sql.SQLException;
 import controller.Choice;
 
 public class StoryDAO {
-	public DynamicArr seq;
-	public int ing_game;
 	
 	
 	
 	
-	public StoryDAO(int num) {
-		super();
-		this.ing_game = num;
-	}
+	
 
 
 
 
 	public void save_story() {
 		
-		seq.add(ing_game);
+
 	}
-	public void load_story()
+	public void load_story(int seq)
 	{
 		ResultSet rs = null;
 		try {

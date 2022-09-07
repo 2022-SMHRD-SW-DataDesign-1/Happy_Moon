@@ -3,17 +3,20 @@ package view;
 
 import java.util.Scanner;
 
+import controller.Choice;
 import controller.SigninController;
 import model.StoryDAO;
 import model.UserDAO;
 import model.UserDTO;
-
+import controller.Choice;
 
 public class main {
 
 	public static void main(String[] args) {
-	
+		Script scr = new Script();
+		scr.loadScript(20);
 		view();
+	
 		
 		
 	}
@@ -29,10 +32,12 @@ public class main {
 	
 	
 	public static void view() {
+		
+		
 		dotArt art = new dotArt();
 		UserDAO dao = new UserDAO(); 
 		UserDTO dto = null;
-
+		
 		
 		
 		
@@ -85,6 +90,7 @@ public class main {
 					String menu2 = sc.next();
 					if(menu2.equals("1")) {
 						
+
 					}else if(menu2.equals("2")) {
 						
 					}else if(menu2.equals("3")) {

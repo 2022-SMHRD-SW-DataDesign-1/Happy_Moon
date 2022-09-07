@@ -1,28 +1,46 @@
 package controller;
 
-import java.util.Scanner;
-
 import model.DynamicArr;
+import model.UserDAO;
 
 public class Choice {
-	Scanner sc= new Scanner(System.in);
+
+	private int sequence;
 	private int choice;
 	private DynamicArr summary;
-	
-	
-	public Choice(int choice, DynamicArr summary) {
-		super();
-		this.choice = choice;
-		summary.add(10);
-		this.summary = summary;
+	private int next;
+
+	public int getSequence() {
+		return sequence;
 	}
-	
-	
+
+	public int getChoice() {
+		return choice;
+	}
+
+	public DynamicArr getSummary() {
+		return summary;
+	}
+
+	public int getNext() {
+		return next;
+	}
+
+	public Choice() {
+		if (choice == 1) {
+			this.next = (sequence + 1) * 10;
+		} else if (choice == 2) {
+			this.next = sequence + 1;
+		}
+
+		this.choice = choice;
+		summary.add(sequence);
+
+	}
+
 	public int user_choice(int choice) {
 		summary.add(choice);
 		return choice;
 	}
-	
-	
-	
+
 }
