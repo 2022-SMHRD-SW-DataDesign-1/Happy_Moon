@@ -24,7 +24,7 @@ public class UserDTO {
 		this.pw = pw;
 	}
 
-	// ��Ŭ��  -> source -> generate getters and setters
+	
 	public String getId() {
 		return id;
 	}

@@ -3,24 +3,37 @@ package view;
 
 import java.util.Scanner;
 
+import controller.Choice;
 import controller.SigninController;
 import model.StoryDAO;
 import model.UserDAO;
 import model.UserDTO;
-
+import controller.Choice;
 
 public class main {
 
 	public static void main(String[] args) {
 	
 		view();
+	
 		
 		
 	}
 	
 	
 	
-	
+	public static int choice() {
+		 Choice user_cho = new Choice();
+		if( == 1) {
+		Choice user_cho1 = new Choice(1);
+		} else if(num == 2) {
+			Choice user_cho = new Choice(2);
+		} else System.out.println("잘못입력하셨습니다.");
+		
+		
+		return user_cho.getNext();
+		
+	}
 	
 	
 	
@@ -32,7 +45,7 @@ public class main {
 		dotArt art = new dotArt();
 		UserDAO dao = new UserDAO();  // ���߿� �ø���
 		UserDTO dto = null;
-
+		
 		
 		
 		
