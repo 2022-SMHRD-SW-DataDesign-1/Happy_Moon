@@ -10,14 +10,6 @@ import controller.Choice;
 
 public class StoryDAO {
 	
-	
-	
-	
-	
-
-
-
-
 	public void save_story() {
 		
 

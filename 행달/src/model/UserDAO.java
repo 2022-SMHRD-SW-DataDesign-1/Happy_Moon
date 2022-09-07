@@ -91,7 +91,7 @@ public class UserDAO {
 				String id = dto.getId();   
 				String pw = dto.getPw();
 				String name = dto.getName();
-				String save = dto.getAge();
+				int save = dto.getSave();
 			
 				
 				String sql = "insert into user_table(user_number,id,pw,name) values(user_id.nextval,?, ?, ?)"; 
@@ -228,8 +228,49 @@ public class UserDAO {
 				e.printStackTrace();
 				return false;
 			}
-	
 		}
+		
+		//세이브 값 불러오기
+		public int loadData(String id) {
+			connect();
+			try {
+				String isOverlap = "select save from user_table where id = ?";
+				psmt = conn.prepareStatement(isOverlap);
+				psmt.setString(1, id);
+				rs = psmt.executeQuery();
+				if(rs.next()) {
+					return rs.getInt(1);
+				}else {
+					return 1;
+				}
+			} catch (SQLException e) {
+				System.out.println("DB sql 문법 오 류");
+				e.printStackTrace();
+				return 1;
+			}
+		}
+		
+		public void saveData(int save, String id) {
+			connect();
+			try {
+				String sql = "update user_table set save= ? where id = ?";
+				psmt = conn.prepareStatement(sql);				
+				psmt.setInt(1, save);
+				psmt.setString(2, id);
+				
+				int cnt = psmt.executeUpdate();
+				if(cnt>0) {
+					System.out.println("자동 저장 성공");
+				}else {
+					System.out.println("자동 저장 실패");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		
 		
 		
 		

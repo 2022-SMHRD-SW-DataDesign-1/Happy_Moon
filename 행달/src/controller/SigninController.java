@@ -27,6 +27,18 @@ public class SigninController {
 			return result;
 		}
 		
+		public boolean LoginOutt(String id, String pw) {
+			boolean result = dao.login(id, pw);
+			
+			if(result) {
+				System.out.println("로그인 성공");
+			}else {
+				System.out.println("로그인 실패");
+			}
+			
+			return result;
+		}
+		
 		
 		
 		// 회원가입이요
