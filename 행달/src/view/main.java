@@ -26,13 +26,13 @@ public class main {
 		Script scr = new Script();
 		
 		scr.loadScript(ch.getNext());
-
-		while (ch.getNext() < 100) {
+				while (ch.getNext() <= 110) {
 
 			System.out.println();
 			System.out.print("당신의 선택은 >>");
+			
 			ch.choice(sc.nextInt());
-				
+			System.out.println(ch.getNext());
 			scr.loadScript(ch.getNext());
 			
 		}
@@ -51,7 +51,7 @@ public class main {
 		
 		boolean flag = true;
 
-		art.init();
+//		art.init();
 		System.out.println("======아무튼 공포 게임======");
 		while (flag) {
 			System.out.println();

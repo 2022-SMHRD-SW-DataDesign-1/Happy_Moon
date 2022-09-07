@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.DriverManager;
 
-
 import model.UserDAO;
 
 public class Script {
@@ -16,32 +15,29 @@ public class Script {
 	ResultSet rs;
 	UserDAO dao = new UserDAO();
 
-
-
-	
 	public void loadScript(int num) {
-		
-		connect();		
+
+		connect();
 		try {
 			String sql = "select story from story_table where story_num = ?";
-			
+
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, num);
-		
-			
+
 			rs = psmt.executeQuery();
-			
-			if(rs.next()) {
+
+			if (rs.next()) {
 				String story = rs.getString(1);
-				char[] forShow =story.toCharArray();
-				for(char temp : forShow) {
-					try {
-						Thread.sleep(50);
-						System.out.print(temp);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+				char[] forShow = story.toCharArray();
+				for (char temp : forShow) {
+					System.out.print(temp);
+//					try {
+//						Thread.sleep(0);						
+//					} catch (InterruptedException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//				}
 				}
 			}
 		} catch (SQLException e) {
@@ -49,18 +45,17 @@ public class Script {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	public void connect() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			
+
 			String url = "jdbc:oracle:thin:@project-db-stu.ddns.net:1524:xe";
 			String db_id = "campus_g_0830_6";
 			String db_pw = "smhrd6";
-				
+
 			conn = DriverManager.getConnection(url, db_id, db_pw);
-			
+
 		} catch (ClassNotFoundException e) {
 			System.out.println("class not found 오류");
 			e.printStackTrace();

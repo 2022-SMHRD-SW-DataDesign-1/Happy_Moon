@@ -30,14 +30,21 @@ public class Choice {
 		
 		sequence++;
 		if (choice == 1) {
-			this.next = (sequence)*10;
+
+			this.next = (sequence) * 10;
+			System.out.println(next);
 		} else if (choice == 2) {
-			this.next = sequence;
+			System.out.print(next);
+			if (sequence == 1) {
+				
+				
+				this.next = (sequence) * 10;
+				System.out.println(next);
+			} else {
+				this.next = sequence+1;
+			}
 		}
 
-		
 	}
-
-	
 
 }
