@@ -84,9 +84,9 @@ public class SummaryDAO {
 	}
 	
 	
-	public String sumSummary() {
-		
-	}
+//	public String sumSummary() {
+//		
+//	}
 	
 	
 	
