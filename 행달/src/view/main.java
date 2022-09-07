@@ -30,32 +30,56 @@ public class main {
 		scr.loadScript(ch.getNext());
 		
 
-		while (ch.getNext() < 100) {
-			dto.setSave(ch.getSequence());
+		while (ch.getNext() <= 110) {
+
 			
+
+			
+
 			System.out.println();
 			//System.out.println("전의 값" + ch.getNext());
 			System.out.print("당신의 선택은 >>");
 			
-			ch.choice(sc.nextInt());
-			System.out.println(ch.getNext());
 
+			dto.setSave(ch.choice(sc.nextInt()));
 			dao.saveData(dto.getSave(), dto.getId());
-
-			scr.loadScript(ch.getNext());
 			
+			scr.loadScript(ch.getNext());
+			if(ch.getNext() == 52 || ch.getNext() == 110) {
+				break;
+			}
 		}
 	}
 	
-	public static void gameStartFrom(int save) {
+	public static void gameStartFrom(int save,UserDTO dto ) {
 		Choice ch = new Choice();
 		Script scr = new Script();
-		
+		UserDAO dao = new UserDAO();
 
 		System.out.println("========== 지난 이야기를 불러옵니다 ==========\n");
 			
 			ch.setNext(save);
 			scr.loadScript(ch.getNext());
+			
+			while (ch.getNext() <= 110) {
+
+				
+
+				
+
+				System.out.println();
+				//System.out.println("전의 값" + ch.getNext());
+				System.out.print("당신의 선택은 >>");
+				
+
+				dto.setSave(ch.choice(sc.nextInt()));
+				dao.saveData(dto.getSave(), dto.getId());
+				
+				scr.loadScript(ch.getNext());
+				if(ch.getNext() == 52 || ch.getNext() == 110) {
+					break;
+				}
+			}
 			
 	}
 	
@@ -110,13 +134,16 @@ public class main {
 				if(lm.LoginCon(id, pw)) {//로그인 성공시
 					
 					while (flag) {
-						System.out.println("[1]새로하기  [2]이어하기  [3]로그아웃");
+						System.out.println("\n[1]새로하기  [2]이어하기  [3]로그아웃");
 						String menu2 = sc.next();
 						if (menu2.equals("1")) {
 							gameStart(dto);
 						} else if (menu2.equals("2")) {
-							gameStartFrom(dao.loadData(id));
-							gameStart(dto);
+							if(dao.loadData(id) == 0) {
+								System.out.println("지난 플레이 정보가 존재하지 않습니다.");
+							}else {
+								gameStartFrom(dao.loadData(id),dto);
+							}
 							
 						} else if (menu2.equals("3")) {
 							System.out.println("로그아웃 되었습니다.");

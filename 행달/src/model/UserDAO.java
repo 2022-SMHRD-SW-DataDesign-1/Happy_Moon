@@ -239,7 +239,7 @@ public class UserDAO {
 				psmt.setString(1, id);
 				rs = psmt.executeQuery();
 				if(rs.next()) {
-					return rs.getInt(1);
+					return rs.getInt("save");
 				}else {
 					return 1;
 				}

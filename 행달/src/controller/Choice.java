@@ -40,7 +40,7 @@ public class Choice {
 		this.next = next;
 	}
 
-	public void choice(int choice) {
+	public int choice(int choice) {
 		
 		sequence++;
 		if (choice == 1) {
@@ -60,8 +60,7 @@ public class Choice {
 			else {
 				this.next = sequence+1;
 			}
-			System.out.println("sequence값" +sequence);
-	}
+	}return next;
 	}
 
 }
