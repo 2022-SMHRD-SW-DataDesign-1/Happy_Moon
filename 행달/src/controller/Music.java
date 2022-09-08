@@ -11,9 +11,10 @@ import model.MusicModel;
 		int currentIndex = 0;
 		
 		public Music() {
-			musicList.add(new MusicModel("bgm//computer+keyboard.mp3"));//1번재생
-			musicList.add(new MusicModel("bgm//scary_comming.mp3"));//1번재생
-			musicList.add(new MusicModel("bgm//walking_nearly.mp3"));//1번재생
+			
+			musicList.add(new MusicModel("bgm//computer+keyboard.mp3"));//1
+			musicList.add(new MusicModel("bgm//scary_comming.mp3"));//2
+			musicList.add(new MusicModel("bgm//walking_nearly.mp3"));//3
 			musicList.add(new MusicModel("bgm//back_ground.mp3"));//1번재생
 		}
 		

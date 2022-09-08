@@ -23,6 +23,8 @@ public class Script {
 		
 		int i=0;
 		Music player = new Music();
+		dotArt art = new dotArt();
+		int i =0;
 		connect();
 		try {
 			String sql = "select story from story_table where story_num = ?";
@@ -35,19 +37,23 @@ public class Script {
 			if (rs.next()) {
 				String story = rs.getString(1);
 
-				char[] forShow = story.toCharArray();
-				for (char temp : forShow) {
-					if(num==40&&i==5) {
-						player.play(3);
-					}
-					System.out.print(temp);
 					try {
-						Thread.sleep(50);						
+						char[] forShow = story.toCharArray();
+						for (char temp : forShow) {
+							System.out.print(temp);
+							Thread.sleep(0);						
+							if(i==50&&num==30) 
+								art.init();
+							if(num == 46 && i == 110 )
+								art.mask();
+							
+							
+							i++;
+						}
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 					e.printStackTrace();				}
 			}
-				}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

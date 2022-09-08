@@ -10,8 +10,10 @@ import model.UserDTO;
 
 public class main {
 	static Scanner sc = new Scanner(System.in);
-
+	
+	
 	public static void main(String[] args) {
+
 		Music bgmp = new Music();
 		bgmp.play(3);
 		view();
@@ -36,7 +38,7 @@ public class main {
 		//
 		
 
-		while (ch.getNext() <= 110) {
+		while (true) {
 			System.out.println();
 			System.out.print("당신의 선택은 >>");
 			int i = sc.nextInt();
@@ -110,8 +112,7 @@ public class main {
 				// if문으로 감쌀거?
 				scr.insertDB(scr.sumSummary(summary), dto.getId());
 				// 테스트출력
-				System.out.println(scr.getSummary(dto.getId())); // <<== 이게 summary 출력용 코드 지우면 저거 없어짐
-				
+			
 
 				if (ch.getNext() == 52 || ch.getNext() == 110) {
 					break;
@@ -137,8 +138,6 @@ public class main {
 		SigninController lm = new SigninController();
 
 		boolean flag = true;
-
-//		art.init();
 		System.out.println("======아무튼 공포 게임======");
 		while (flag) {
 			System.out.println();

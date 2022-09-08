@@ -259,11 +259,6 @@ public class UserDAO {
 				psmt.setString(2, id);
 				
 				int cnt = psmt.executeUpdate();
-				if(cnt>0) {
-					System.out.println("자동 저장 성공");
-				}else {
-					System.out.println("자동 저장 실패");
-				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
