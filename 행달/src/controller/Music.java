@@ -12,6 +12,7 @@ import model.MusicModel;
 		
 		public Music() {
 			musicList.add(new MusicModel("bgm//computer+keyboard.mp3"));//1번재생
+			musicList.add(new MusicModel("bgm//scary.mp3"));
 		}
 		
 		public MusicModel play(int num) {
