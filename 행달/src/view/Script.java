@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import controller.Music;
+
 import java.sql.DriverManager;
 
 import model.UserDAO;
@@ -17,6 +20,9 @@ public class Script {
 
 	public void loadScript(int num) {
 
+		
+		int i=0;
+		Music player = new Music();
 		connect();
 		try {
 			String sql = "select story from story_table where story_num = ?";
@@ -31,6 +37,9 @@ public class Script {
 
 				char[] forShow = story.toCharArray();
 				for (char temp : forShow) {
+					if(num==40&&i==5) {
+						player.play(3);
+					}
 					System.out.print(temp);
 					try {
 						Thread.sleep(50);						

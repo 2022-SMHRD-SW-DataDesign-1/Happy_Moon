@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>bgm/back_ground.MP3</name>
+			<type>1</type>
+			<locationURI>PARENT-4-PROJECT_LOC/back_ground.MP3</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>
