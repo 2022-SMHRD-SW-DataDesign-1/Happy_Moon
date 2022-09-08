@@ -42,18 +42,21 @@ public class Choice {
 
 		sequence++;
 		if (choice == 1) {
+			System.out.println(next);
 			if (next == 320) {
 
 				setNext(next - 1);
 			} else if (next == 88) {
 				setNext(90);
-			}
+			}else if(next == 45) {
+				setNext(450);
+			}else {
 			this.next = (next) + 10;
-			System.out.println(next);
-			setNext(next);
+		
+			setNext(next);}
 //			dto.setSave((sequence)*10) // 여기에 이걸 저장하는데 성공만하면 그냥 불러올 수있어
 		} else if (choice == 2) {
-			System.out.println("next값" + next);
+		
 			if (next == 10) {
 				setNext(sequence * 10);
 
@@ -63,7 +66,7 @@ public class Choice {
 				setNext(78);
 			} else if (next == 22) {
 				setNext(42);
-			} else if (next == 42 || next == 32 || next == 45) {
+			} else if (next == 42 || next == 32) {
 				setNext(next * 10);
 			} else if (next == 20 || next == 30 || next == 40 || next == 50 || next == 60 || next == 70 || next == 80
 					|| next == 90 || next == 100) {
