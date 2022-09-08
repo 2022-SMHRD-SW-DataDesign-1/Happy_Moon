@@ -13,9 +13,9 @@ public class main {
 	
 	
 	public static void main(String[] args) {
-	
 
-
+		Music bgmp = new Music();
+		bgmp.play(3);
 		view();
 
 	}

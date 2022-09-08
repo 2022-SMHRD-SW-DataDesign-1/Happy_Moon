@@ -7,6 +7,10 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="C:/oraclexe/app/oracle/product/11.2.0/server/jdbc/lib/ojdbc6.jar"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/music/player.jar"/>
+=======
+	<classpathentry kind="lib" path="C:/Users/smhrd/Desktop/스마트인재개발원_김하랑/player.jar"/>
+>>>>>>> branch 'master' of https://github.com/2022-SMHRD-SW-DataDesign-1/happy_moon.git
 	<classpathentry kind="output" path="bin"/>
 </classpath>
