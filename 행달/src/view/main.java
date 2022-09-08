@@ -12,7 +12,8 @@ public class main {
 	static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
-
+		Music bgmp = new Music();
+		bgmp.play(3);
 		view();
 
 	}
